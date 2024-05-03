@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EmoShift.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+
+            <Label
+                Text="CACI's Emotional Shift Detector"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Image 
+                x:Name="VideoImg"
+                WidthRequest="640"
+                HeightRequest="480"
+                />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="cbShowFaceLandmarks" Grid.Row="0" Grid.Column="0"/>
+                <Label Text="Show Face landmarks"  Grid.Row="0" Grid.Column="1">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                     Binding="{Binding Source={x:Reference cbShowFaceLandmarks}, Path=IsChecked}"
+                     Value="true">
+                            <Setter Property="FontAttributes"
+                    Value="Italic, Bold" />
+                            <Setter Property="FontSize"
+                    Value="18" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+
+            </Grid>
+
+            
+            <Button
+                x:Name="RecordBtn"
+                Text="Start Recording" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnRecordBtnClicked"
+                HorizontalOptions="Fill" />
+
+            <Editor x:Name="EmoLog"
+                Placeholder="Temp output of Emo Log"
+                HeightRequest="250"
+                TextChanged="OnEditorTextChanged"
+                Completed="OnEditorCompleted" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
